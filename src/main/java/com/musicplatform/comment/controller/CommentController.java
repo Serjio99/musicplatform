@@ -7,6 +7,7 @@ import com.musicplatform.comment.service.CommentService;
 import com.musicplatform.common.dto.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,17 +34,20 @@ public class CommentController {
         return ApiResponse.success(commentService.getPublicCommentsBySong(songId));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/admin/comments")
     public ApiResponse<List<CommentDto>> getAllAdminComments() {
         return ApiResponse.success(commentService.getAllAdminComments());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/api/admin/comments/{id}/status")
     public ApiResponse<CommentDto> updateStatus(@PathVariable UUID id,
                                                 @Valid @RequestBody UpdateCommentStatusRequest request) {
         return ApiResponse.success(commentService.updateStatus(id, request), "Статус комментария обновлён");
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/api/admin/comments/{id}")
     public ApiResponse<Void> delete(@PathVariable UUID id) {
         commentService.delete(id);

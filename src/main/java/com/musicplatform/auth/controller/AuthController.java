@@ -3,6 +3,7 @@ package com.musicplatform.auth.controller;
 import com.musicplatform.auth.dto.*;
 import com.musicplatform.auth.service.AuthService;
 import com.musicplatform.common.dto.ApiResponse;
+import com.musicplatform.user.dto.UserDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,10 @@ public class AuthController {
     public ApiResponse<Void> logout(@Valid @RequestBody RefreshTokenRequest request) {
         authService.logout(request);
         return ApiResponse.success(null, "Выход выполнен успешно");
+    }
+
+    @GetMapping("/me")
+    public ApiResponse<UserDto> me() {
+        return ApiResponse.success(authService.getCurrentUser());
     }
 }

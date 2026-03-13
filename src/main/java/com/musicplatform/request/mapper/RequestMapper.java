@@ -1,15 +1,37 @@
-package com.musicplatform.request.dto;
+package com.musicplatform.request.mapper;
 
-import com.musicplatform.request.entity.RequestStatus;
-import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import com.musicplatform.request.dto.RequestDto;
+import com.musicplatform.request.entity.RequestEntity;
 
-@Getter
-@Setter
-public class UpdateRequestStatusRequest {
+public class RequestMapper {
 
-    @NotNull
-    private RequestStatus status;
+    private RequestMapper() {
+    }
 
+    public static RequestDto toDto(RequestEntity entity) {
+
+        if (entity == null) {
+            return null;
+        }
+
+        return RequestDto.builder()
+                .id(entity.getId())
+
+                .userId(entity.getUser().getId())
+                .userName(entity.getUser().getName())
+
+                .songId(entity.getSong().getId())
+                .songName(entity.getSong().getName())
+
+                .status(entity.getStatus())
+
+                .message(entity.getMessage())
+
+                .price(entity.getPrice())
+
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+
+                .build();
+    }
 }

@@ -28,7 +28,6 @@ public class FileService {
         entity.setContentType(stored.contentType());
         entity.setSizeBytes(stored.sizeBytes());
         entity.setStoragePath(stored.storagePath());
-        entity.setPublicUrl("/api/files/" + entity.getId());
         entity.setImage(isImage(stored.contentType()));
         entity.setAudio(isAudio(stored.contentType()));
 

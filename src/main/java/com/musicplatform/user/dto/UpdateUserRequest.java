@@ -1,24 +1,17 @@
 package com.musicplatform.user.dto;
 
-import com.musicplatform.common.enums.UserRole;
-import lombok.Builder;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
-
-import java.util.UUID;
+import lombok.Setter;
 
 @Getter
-@Builder
-public class UserDto {
+@Setter
+public class UpdateUserRequest {
 
-    private UUID id;
-
-    private String email;
-
+    @NotBlank
     private String name;
 
     private String phone;
-
-    private UserRole role;
 
     private String organizationName;
 

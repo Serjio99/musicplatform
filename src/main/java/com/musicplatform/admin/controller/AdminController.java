@@ -1,15 +1,22 @@
-
 package com.musicplatform.admin.controller;
 
-import org.springframework.web.bind.annotation.*;
+import com.musicplatform.admin.dto.AdminDashboardDto;
+import com.musicplatform.admin.service.AdminService;
+import com.musicplatform.common.dto.ApiResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequiredArgsConstructor
 public class AdminController {
 
-@GetMapping
-public String test(){
-return "admin endpoint";
-}
+    private final AdminService adminService;
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/api/admin/dashboard")
+    public ApiResponse<AdminDashboardDto> dashboard() {
+        return ApiResponse.success(adminService.getDashboard());
+    }
 }

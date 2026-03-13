@@ -34,11 +34,13 @@ logging:
     org.hibernate.SQL: WARN
 
 app:
-
   cors:
     allowed-origins: "*"
 
   security:
-    jwt-secret: change_this_secret
+    jwt-secret: "change_this_secret_change_this_secret_change_this_secret_123456"
     access-token-expiration: 3600
-    refresh-token-expiration: 86400
+    refresh-token-expiration: 2592000
+
+  file-storage:
+    upload-dir: uploads

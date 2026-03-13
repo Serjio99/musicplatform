@@ -1,23 +1,32 @@
 package com.musicplatform.song.dto;
 
-import lombok.Builder;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter
-@Builder
-public class SongDto {
+@Setter
+public class UpdateSongRequest {
 
-    private UUID id;
+    @NotBlank
     private String name;
+
     private String description;
+
     private UUID imageFileId;
+
     private UUID audioFileId;
+
     private BigDecimal licensePrice;
+
     private BigDecimal economyPrice;
+
     private BigDecimal standardPrice;
+
     private BigDecimal businessPrice;
+
     private BigDecimal premiumPrice;
 }

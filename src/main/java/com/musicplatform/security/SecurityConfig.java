@@ -37,7 +37,8 @@ public class SecurityConfig {
                                 "/api/auth/**"
                         ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/songs/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/comments/public/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/comments").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/comments/song/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/files/**").permitAll()
                         .anyRequest().authenticated()
                 )

@@ -14,4 +14,6 @@ public interface CommentRepository extends JpaRepository<CommentEntity, UUID> {
     List<CommentEntity> findAllByDeletedFalseOrderByCreatedAtDesc();
 
     List<CommentEntity> findAllBySongIdAndDeletedFalseAndStatusOrderByCreatedAtDesc(UUID songId, CommentStatus status);
+
+    long countByStatus(CommentStatus status);
 }

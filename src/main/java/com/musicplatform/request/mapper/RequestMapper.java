@@ -25,12 +25,11 @@ public class RequestMapper {
 
                 .status(entity.getStatus())
 
-                .message(entity.getMessage())
+                .comment(entity.getComment())
 
                 .price(entity.getPrice())
 
                 .createdAt(entity.getCreatedAt())
-                .updatedAt(entity.getUpdatedAt())
 
                 .build();
     }

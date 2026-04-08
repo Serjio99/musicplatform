@@ -1,6 +1,7 @@
 package com.musicplatform.payment.repository;
 
 import com.musicplatform.payment.entity.PaymentEntity;
+import com.musicplatform.payment.entity.PaymentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface PaymentRepository extends JpaRepository<PaymentEntity, UUID> {
     Optional<PaymentEntity> findByRequestId(UUID requestId);
 
     Optional<PaymentEntity> findByExternalPaymentId(String externalPaymentId);
+
+    long countByStatus(PaymentStatus status);
 }

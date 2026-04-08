@@ -8,6 +8,7 @@ import com.musicplatform.common.exception.BadRequestException;
 import com.musicplatform.common.exception.NotFoundException;
 import com.musicplatform.common.exception.UnauthorizedException;
 import com.musicplatform.security.JwtService;
+import com.musicplatform.security.SecurityUtils;
 import com.musicplatform.user.dto.UserDto;
 import com.musicplatform.user.entity.UserEntity;
 import com.musicplatform.user.mapper.UserMapper;
@@ -90,6 +91,15 @@ public class AuthService {
                     token.setRevoked(true);
                     refreshTokenRepository.save(token);
                 });
+    }
+
+    public UserDto getCurrentUser() {
+        String email = SecurityUtils.getCurrentUserEmail();
+
+        UserEntity user = userRepository.findByEmailAndDeletedFalse(email)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        return UserMapper.toDto(user);
     }
 
     private AuthResponse buildAuthResponse(UserEntity user) {
